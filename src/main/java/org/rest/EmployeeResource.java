@@ -11,6 +11,7 @@ public class EmployeeResource {
 
     EmployeeRepository empRepo = EmployeeRepository.getInstance();
 
+    //Get all employees
     @GET
     @Produces({"application/xml","application/json"})
     public Response getEmployees()
@@ -24,6 +25,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.NOT_FOUND).entity("Records not found").build();
     }
 
+    //Get employee by their id
     @GET
     @Path("{empId}")
     @Produces({"application/xml","application/json"})
@@ -35,6 +37,7 @@ public class EmployeeResource {
         return Response.ok(employee).build();
     }
 
+    //Add employee using form
     @POST
     @Consumes("application/x-www-form-urlencoded")
     public Response addEmployeeBean(@Valid @BeanParam Employee emp)
@@ -44,6 +47,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.CREATED).entity("Created").build();
     }
 
+    //Add employee using xml or json
     @POST
     @Consumes({"application/xml","application/json"})
     public Response addEmployee(@Valid Employee emp)
@@ -53,6 +57,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.CREATED).entity("Created").build();
     }
 
+    //Update employee using form
     @PATCH
     @Path("{empId}")
     @Consumes("application/x-www-form-urlencoded")
@@ -68,6 +73,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.OK).entity("Records Updated").build();
     }
 
+    //Update employee using xml or json
     @PATCH
     @Path("{empId}")
     @Consumes({"application/xml","application/json"})
@@ -83,6 +89,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.OK).entity("Records Updated").build();
     }
 
+    //Delete employee by their id
     @DELETE
     @Path("{empId}")
     public Response deleteEmployee(@PathParam("empId") int empId)
@@ -97,6 +104,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.OK).entity("Recodes Deleted").build();
     }
 
+    //Get the Vehicle details of Employee by employee id
     @GET
     @Path("{empId}/Vehicles")
     @Produces({"Application/xml","Application/json"})
@@ -116,6 +124,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.NOT_FOUND).entity("Employee "+empId+" don't have Vehicles").build();
     }
 
+    //Get a vehicle details of Employee by vehicle id
     @GET
     @Path("{empId}/Vehicles/{vehicleId}")
     @Produces({"application/xml","application/json"})
@@ -133,6 +142,7 @@ public class EmployeeResource {
         return Response.ok(Response.Status.OK).entity(vehicle).build();
     }
 
+    //Add employee vehicle using form
     @POST
     @Path("{empId}/Vehicles")
     @Consumes("application/x-www-form-urlencoded")
@@ -148,6 +158,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.CREATED).entity("Vehicle added").build();
     }
 
+    //Add employee vehicle using xml or json
     @POST
     @Path("{empId}/Vehicles")
     @Consumes({"application/xml","application/json"})
@@ -163,6 +174,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.CREATED).entity("Vehicle added").build();
     }
 
+    //Update employee vehicle using form
     @PATCH
     @Path("{empId}/Vehicles/{vehicleId}")
     @Consumes("application/x-www-form-urlencoded")
@@ -183,6 +195,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.OK).entity("Vehicle details updated").build();
     }
 
+    // Update employee vehicle using xml or json
     @PATCH
     @Path("{empId}/Vehicles/{vehicleId}")
     @Consumes({"application/xml","application/json"})
@@ -203,6 +216,7 @@ public class EmployeeResource {
         return Response.status(Response.Status.OK).entity("Vehicle details updated").build();
     }
 
+    // Delete employee vehicle
     @DELETE
     @Path("{empId}/Vehicles/{vehicleId}")
     public Response deleteVehicle(@PathParam("empId") int empId,@PathParam("vehicleId") int vehicleId)
